@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Admin Dashboard · Norma.dev</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --bg:#0a0a0f;
+  --surf:#111118;
+  --card:#16161f;
+  --card2:#1c1c28;
+  --border:#ffffff12;
+  --border2:#ffffff20;
+  --text:#f0eeff;
+  --muted:#8884a8;
+  --soft:#4a4768;
+  --p1:#c084a8;
+  --p1g:linear-gradient(135deg,#c084a8,#9b6fd4);
+  --p2:#7ab8c9;
+  --p3:#d4956a;
+  --p4:#7aad7a;
+  --p5:#9d8cc4;
+  --danger:#e07070;
+  --success:#7aad7a;
+}
+
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
+
+/* ── SIDEBAR ── */
+.sidebar{
+  position:fixed;top:0;left:0;width:240px;height:100vh;
+  background:var(--surf);border-right:1px solid var(--border);
+  display:flex;flex-direction:column;z-index:100;
+  padding:1.5rem 0;
+}
+.sidebar-logo{
+  padding:0 1.5rem 1.5rem;
+  border-bottom:1px solid var(--border);
+  margin-bottom:1rem;
+}
+.sidebar-logo .brand{
+  font-family:'JetBrains Mono',monospace;
+  font-size:1.1rem;font-weight:500;
+  background:var(--p1g);-webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;background-clip:text;
+}
+.sidebar-logo .version{
+  font-size:.7rem;color:var(--muted);
+  font-family:'JetBrains Mono',monospace;margin-top:2px;
+}
+.nav-item{
+  display:flex;align-items:center;gap:10px;
+  padding:.6rem 1.5rem;font-size:.85rem;font-weight:500;
+  color:var(--muted);text-decoration:none;transition:all .2s;
+  border-left:2px solid transparent;
+}
+.nav-item:hover{color:var(--text);background:var(--card)}
+.nav-item.active{color:var(--p1);border-left-color:var(--p1);background:rgba(192,132,168,.07)}
+.nav-icon{width:16px;height:16px;opacity:.7;flex-shrink:0}
+.sidebar-footer{margin-top:auto;padding:1rem 1.5rem;border-top:1px solid var(--border)}
+.sidebar-footer a{
+  display:flex;align-items:center;gap:8px;font-size:.8rem;
+  color:var(--muted);text-decoration:none;transition:color .2s;
+}
+.sidebar-footer a:hover{color:var(--text)}
+
+/* ── MAIN ── */
+.main{margin-left:240px;min-height:100vh;padding:2rem 2.5rem}
+
+/* ── TOP BAR ── */
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:2rem;
+}
+.topbar h1{font-size:1.4rem;font-weight:600;color:var(--text)}
+.topbar p{font-size:.82rem;color:var(--muted);margin-top:2px}
+.topbar-right{display:flex;align-items:center;gap:.75rem}
+.badge-live{
+  display:flex;align-items:center;gap:6px;
+  padding:5px 14px;border-radius:999px;
+  background:rgba(122,173,122,.1);border:1px solid rgba(122,173,122,.25);
+  font-size:.72rem;font-weight:600;color:var(--p4);
+  font-family:'JetBrains Mono',monospace;
+}
+.dot-live{width:6px;height:6px;border-radius:50%;background:var(--p4);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+
+/* ── STATS GRID ── */
+.stats-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;
+  margin-bottom:2rem;
+}
+.stat-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:1.25rem 1.5rem;
+  position:relative;overflow:hidden;transition:border-color .2s,transform .2s;
+}
+.stat-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+.stat-card::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at top left,var(--accent-glow,transparent) 0%,transparent 60%);
+  opacity:.15;pointer-events:none;
+}
+.stat-card.c1{--accent-glow:#c084a8}
+.stat-card.c2{--accent-glow:#7ab8c9}
+.stat-card.c3{--accent-glow:#d4956a}
+.stat-card.c4{--accent-glow:#9d8cc4}
+.stat-label{font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
+.stat-num{font-size:2rem;font-weight:600;font-family:'JetBrains Mono',monospace;line-height:1}
+.stat-sub{font-size:.75rem;color:var(--muted);margin-top:.4rem}
+.stat-icon{
+  position:absolute;top:1.25rem;right:1.25rem;
+  width:32px;height:32px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;
+}
+
+/* ── SEARCH & FILTER BAR ── */
+.toolbar{
+  display:flex;align-items:center;gap:.75rem;
+  margin-bottom:1.25rem;
+}
+.search-wrap{position:relative;flex:1;max-width:360px}
+.search-wrap input{
+  width:100%;background:var(--card);border:1px solid var(--border);
+  border-radius:10px;padding:.6rem 1rem .6rem 2.5rem;
+  color:var(--text);font-family:'Inter',sans-serif;font-size:.85rem;
+  outline:none;transition:border-color .2s;
+}
+.search-wrap input:focus{border-color:var(--p1)}
+.search-wrap input::placeholder{color:var(--muted)}
+.search-icon{
+  position:absolute;left:.75rem;top:50%;transform:translateY(-50%);
+  color:var(--muted);font-size:.85rem;pointer-events:none;
+}
+.filter-select{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:10px;padding:.6rem 1rem;
+  color:var(--text);font-family:'Inter',sans-serif;font-size:.85rem;
+  outline:none;cursor:pointer;transition:border-color .2s;
+}
+.filter-select:focus{border-color:var(--p1)}
+.count-badge{
+  margin-left:auto;font-size:.78rem;font-weight:500;
+  color:var(--muted);font-family:'JetBrains Mono',monospace;
+}
+
+/* ── TABLE ── */
+.table-wrap{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:16px;overflow:hidden;
+}
+table{width:100%;border-collapse:collapse}
+thead tr{background:var(--card2)}
+th{
+  padding:.85rem 1.25rem;font-size:.7rem;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+  text-align:left;border-bottom:1px solid var(--border);white-space:nowrap;
+}
+td{
+  padding:.9rem 1.25rem;font-size:.83rem;
+  border-bottom:1px solid var(--border);vertical-align:top;
+}
+tr:last-child td{border-bottom:none}
+tbody tr{transition:background .15s}
+tbody tr:hover{background:var(--card2)}
+
+.td-name{font-weight:500;color:var(--text)}
+.td-email{color:var(--p2);font-family:'JetBrains Mono',monospace;font-size:.78rem}
+.td-subject{color:var(--muted);font-size:.82rem}
+.td-msg{
+  color:var(--muted);font-size:.8rem;line-height:1.5;
+  max-width:280px;
+}
+.td-msg .msg-preview{
+  display:-webkit-box;-webkit-line-clamp:2;
+  -webkit-box-orient:vertical;overflow:hidden;
+}
+.td-time{
+  color:var(--soft);font-size:.75rem;
+  font-family:'JetBrains Mono',monospace;white-space:nowrap;
+}
+.td-ip{
+  color:var(--soft);font-size:.72rem;
+  font-family:'JetBrains Mono',monospace;
+}
+
+.avatar{
+  width:32px;height:32px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.72rem;font-weight:600;flex-shrink:0;
+  background:rgba(192,132,168,.15);color:var(--p1);
+  border:1px solid rgba(192,132,168,.2);
+}
+.sender-cell{display:flex;align-items:center;gap:.75rem}
+
+.expand-btn{
+  background:none;border:1px solid var(--border);
+  border-radius:6px;padding:3px 8px;color:var(--muted);
+  font-size:.72rem;cursor:pointer;transition:all .2s;
+  font-family:'JetBrains Mono',monospace;
+}
+.expand-btn:hover{border-color:var(--p1);color:var(--p1)}
+
+/* ── EXPANDED ROW ── */
+.expanded-row td{background:rgba(192,132,168,.04);padding:1rem 1.25rem 1rem 4rem}
+.expanded-row .full-msg{
+  font-size:.83rem;color:var(--text);line-height:1.7;
+  border-left:2px solid var(--p1);padding-left:1rem;
+}
+
+/* ── EMPTY STATE ── */
+.empty-state{
+  text-align:center;padding:4rem 2rem;
+  color:var(--muted);
+}
+.empty-state .empty-icon{font-size:2rem;margin-bottom:.75rem;opacity:.4}
+.empty-state p{font-size:.9rem}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--soft);border-radius:4px}
+
+@media(max-width:900px){
+  .sidebar{display:none}
+  .main{margin-left:0;padding:1.5rem}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:560px){
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .stat-num{font-size:1.5rem}
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="brand">norma.dev</div>
+    <div class="version">admin dashboard v1.0</div>
+  </div>
+  <a href="/admin/messages" class="nav-item active">
+    <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+    Messages
+    <span style="margin-left:auto;background:rgba(192,132,168,.15);color:var(--p1);font-size:.65rem;padding:2px 8px;border-radius:999px;font-weight:600">{{ total_messages }}</span>
+  </a>
+  <a href="/admin/visits" class="nav-item">
+    <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+    Page Visits
+    <span style="margin-left:auto;background:rgba(122,184,201,.1);color:var(--p2);font-size:.65rem;padding:2px 8px;border-radius:999px;font-weight:600">{{ total_visits }}</span>
+  </a>
+  <div class="sidebar-footer">
+    <a href="/">
+      <svg style="width:14px;height:14px" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+      Kembali ke Portfolio
+    </a>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div>
+      <h1>Pesan Masuk</h1>
+      <p>Semua pesan dari form kontak portfolio</p>
+    </div>
+    <div class="topbar-right">
+      <div class="badge-live">
+        <span class="dot-live"></span>
+        LIVE
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-grid">
+    <div class="stat-card c1">
+      <div class="stat-label">Total Pesan</div>
+      <div class="stat-num" style="color:var(--p1)">{{ total_messages }}</div>
+      <div class="stat-sub">semua waktu</div>
+      <div class="stat-icon" style="background:rgba(192,132,168,.1)">📨</div>
+    </div>
+    <div class="stat-card c2">
+      <div class="stat-label">Kunjungan</div>
+      <div class="stat-num" style="color:var(--p2)">{{ total_visits }}</div>
+      <div class="stat-sub">page views</div>
+      <div class="stat-icon" style="background:rgba(122,184,201,.1)">👁</div>
+    </div>
+    <div class="stat-card c3">
+      <div class="stat-label">Pesan Hari Ini</div>
+      <div class="stat-num" style="color:var(--p3)">{{ today_messages }}</div>
+      <div class="stat-sub">{{ today_str }}</div>
+      <div class="stat-icon" style="background:rgba(212,149,106,.1)">📅</div>
+    </div>
+    <div class="stat-card c4">
+      <div class="stat-label">Unik Pengirim</div>
+      <div class="stat-num" style="color:var(--p5)">{{ unique_senders }}</div>
+      <div class="stat-sub">email berbeda</div>
+      <div class="stat-icon" style="background:rgba(157,140,196,.1)">👤</div>
+    </div>
+  </div>
+
+  <!-- TOOLBAR -->
+  <div class="toolbar">
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Cari nama, email, atau pesan..."/>
+    </div>
+    <select class="filter-select" id="sortSelect">
+      <option value="desc">Terbaru dulu</option>
+      <option value="asc">Terlama dulu</option>
+    </select>
+    <span class="count-badge" id="countBadge">{{ total_messages }} pesan</span>
+  </div>
+
+  <!-- TABLE -->
+  <div class="table-wrap">
+    {% if messages %}
+    <table id="msgTable">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Pengirim</th>
+          <th>Subjek</th>
+          <th>Pesan</th>
+          <th>Waktu</th>
+          <th>IP</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="msgBody">
+        {% for m in messages %}
+        <tr class="msg-row" data-name="{{ m.name|lower }}" data-email="{{ m.email|lower }}" data-msg="{{ m.message|lower }}" data-time="{{ m.created_at }}">
+          <td><span style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--soft)">#{{ m.id }}</span></td>
+          <td>
+            <div class="sender-cell">
+              <div class="avatar">{{ m.name[:2]|upper }}</div>
+              <div>
+                <div class="td-name">{{ m.name }}</div>
+                <div class="td-email">{{ m.email }}</div>
+              </div>
+            </div>
+          </td>
+          <td><span class="td-subject">{{ m.subject or '—' }}</span></td>
+          <td>
+            <div class="td-msg">
+              <div class="msg-preview" id="preview-{{ m.id }}">{{ m.message }}</div>
+            </div>
+          </td>
+          <td><span class="td-time">{{ m.created_at }}</span></td>
+          <td><span class="td-ip">{{ m.ip_address or '—' }}</span></td>
+          <td>
+            <button class="expand-btn" onclick="toggleExpand({{ m.id }}, `{{ m.message|replace('`','\\`')|replace('\n',' ') }}`)">expand</button>
+          </td>
+        </tr>
+        <tr id="expanded-{{ m.id }}" class="expanded-row" style="display:none">
+          <td colspan="7">
+            <div class="full-msg" id="fullmsg-{{ m.id }}"></div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <div class="empty-state">
+      <div class="empty-icon">📭</div>
+      <p>Belum ada pesan masuk.</p>
+      <p style="font-size:.78rem;margin-top:.5rem;color:var(--soft)">Pesan dari form kontak akan muncul di sini.</p>
+    </div>
+    {% endif %}
+  </div>
+
+</main>
+
+<script>
+function toggleExpand(id, fullMsg) {
+  const row = document.getElementById('expanded-' + id);
+  const msgEl = document.getElementById('fullmsg-' + id);
+  const btn = row.previousElementSibling.querySelector('.expand-btn');
+  if (row.style.display === 'none') {
+    msgEl.textContent = fullMsg;
+    row.style.display = 'table-row';
+    btn.textContent = 'collapse';
+    btn.style.color = 'var(--p1)';
+    btn.style.borderColor = 'var(--p1)';
+  } else {
+    row.style.display = 'none';
+    btn.textContent = 'expand';
+    btn.style.color = '';
+    btn.style.borderColor = '';
+  }
+}
+
+const searchInput = document.getElementById('searchInput');
+const sortSelect  = document.getElementById('sortSelect');
+const countBadge  = document.getElementById('countBadge');
+
+function filterTable() {
+  const q = searchInput.value.toLowerCase().trim();
+  const rows = document.querySelectorAll('.msg-row');
+  let visible = 0;
+  rows.forEach(row => {
+    const match = !q ||
+      row.dataset.name.includes(q) ||
+      row.dataset.email.includes(q) ||
+      row.dataset.msg.includes(q);
+    row.style.display = match ? '' : 'none';
+    const expandedRow = row.nextElementSibling;
+    if (expandedRow && expandedRow.classList.contains('expanded-row')) {
+      expandedRow.style.display = match ? expandedRow.style.display : 'none';
+    }
+    if (match) visible++;
+  });
+  countBadge.textContent = visible + ' pesan';
+}
+
+function sortTable() {
+  const tbody = document.getElementById('msgBody');
+  if (!tbody) return;
+  const rows = Array.from(tbody.querySelectorAll('.msg-row'));
+  rows.sort((a, b) => {
+    const tA = a.dataset.time, tB = b.dataset.time;
+    return sortSelect.value === 'desc' ? tB.localeCompare(tA) : tA.localeCompare(tB);
+  });
+  rows.forEach(row => {
+    tbody.appendChild(row);
+    const exp = document.getElementById('expanded-' + row.querySelector('.expand-btn')?.getAttribute('onclick')?.match(/\d+/)?.[0]);
+    if (exp) tbody.appendChild(exp);
+  });
+}
+
+searchInput.addEventListener('input', filterTable);
+sortSelect.addEventListener('change', sortTable);
+</script>
+</body>
+</html>

@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Norma Zuhrotul Hayati – AI & Data Engineer Portfolio"/>
+<title>Norma Zuhrotul Hayati 🍓</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Patrick+Hand&family=Special+Elite&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cream:#fdf6ec;--cream2:#faf0e2;--red:#c8312b;--red-light:#e8534e;
+  --red-pale:#fde8e8;--blue-gingham:#b8d4e8;--blue-light:#dceef8;
+  --green-btn:#8fad6a;--green-dark:#5a7a3a;--yellow:#f5d06a;
+  --brown:#7a4a2a;--brown-light:#c4956a;--ink:#2a1a0e;--ink-light:#5a3a2a;
+  --paper:#fff9f0;--tape:rgba(255,232,160,.8);
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Patrick Hand',cursive;
+  background-color:var(--cream);
+  background-image:
+    repeating-linear-gradient(0deg,transparent,transparent 29px,rgba(184,212,232,.32) 29px,rgba(184,212,232,.32) 31px),
+    repeating-linear-gradient(90deg,transparent,transparent 29px,rgba(184,212,232,.32) 29px,rgba(184,212,232,.32) 31px);
+  color:var(--ink);line-height:1.6;overflow-x:hidden;
+}
+
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:200;background:rgba(253,246,236,.93);backdrop-filter:blur(10px);border-bottom:2px solid var(--red);padding:.65rem 2rem;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Special Elite',cursive;font-size:1.25rem;color:var(--red);text-decoration:none}
+.logo span{color:var(--brown)}
+.nav-links{list-style:none;display:flex;gap:1.75rem}
+.nav-links a{font-family:'Caveat',cursive;font-size:1.1rem;font-weight:600;color:var(--ink-light);text-decoration:none;position:relative;transition:color .2s}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:2px;background:var(--red);transform:scaleX(0);transition:transform .2s;transform-origin:left}
+.nav-links a:hover{color:var(--red)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px;transition:all .3s}
+@media(max-width:600px){
+  .hamburger{display:flex}
+  .nav-links{display:none;flex-direction:column;gap:0;position:fixed;top:52px;left:0;right:0;background:var(--cream);border-bottom:2px solid var(--red);padding:.75rem 0;z-index:199}
+  .nav-links.open{display:flex}
+  .nav-links a{padding:.5rem 2rem;font-size:1.2rem}
+}
+
+/* PAPER CARD */
+.paper-card{background:var(--paper);border:1.5px solid rgba(122,74,42,.15);border-radius:3px;box-shadow:3px 4px 0 rgba(122,74,42,.12),6px 8px 0 rgba(122,74,42,.06);position:relative}
+
+/* TAPE */
+.tape{position:absolute;background:var(--tape);border:1px solid rgba(200,160,60,.3);border-radius:3px;z-index:10}
+
+/* PIN */
+.pin{position:absolute;width:13px;height:13px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ff7070,var(--red));box-shadow:0 2px 4px rgba(0,0,0,.3);z-index:20;top:-6px;left:50%;transform:translateX(-50%)}
+
+/* BUTTONS */
+.btn-red{display:inline-block;padding:.6rem 1.65rem;background:var(--red);color:#fff;font-family:'Caveat',cursive;font-size:1.15rem;font-weight:700;text-decoration:none;border-radius:2px;border:none;cursor:pointer;box-shadow:3px 3px 0 var(--brown);transition:transform .15s,box-shadow .15s;transform:rotate(-.4deg)}
+.btn-red:hover{transform:rotate(0) translateY(-2px);box-shadow:4px 5px 0 var(--brown)}
+.btn-outline{display:inline-block;padding:.6rem 1.65rem;background:var(--paper);color:var(--ink);font-family:'Caveat',cursive;font-size:1.15rem;font-weight:700;text-decoration:none;border-radius:2px;border:2px solid var(--brown-light);cursor:pointer;box-shadow:3px 3px 0 rgba(122,74,42,.2);transition:transform .15s,box-shadow .15s;transform:rotate(.3deg)}
+.btn-outline:hover{transform:rotate(0) translateY(-2px);box-shadow:4px 5px 0 rgba(122,74,42,.22)}
+
+/* ══ HERO ══ */
+#hero{min-height:100vh;padding:7rem 2rem 4rem;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.float-sticker{position:absolute;pointer-events:none;z-index:2;animation:floatBob 5s ease-in-out infinite}
+@keyframes floatBob{0%,100%{transform:translateY(0) rotate(var(--r,0deg))}50%{transform:translateY(-8px) rotate(var(--r,0deg))}}
+
+.hero-board{max-width:900px;width:100%;position:relative;z-index:1;display:grid;grid-template-columns:1fr 270px;gap:2rem;align-items:start}
+@media(max-width:720px){.hero-board{grid-template-columns:1fr}}
+
+.hero-paper{padding:2.25rem 2.25rem 1.75rem;transform:rotate(-.4deg);animation:fadeSlide .8s ease both}
+@keyframes fadeSlide{from{opacity:0;transform:rotate(-.4deg) translateY(22px)}to{opacity:1;transform:rotate(-.4deg) translateY(0)}}
+
+.hero-tag-row{display:flex;align-items:center;gap:.5rem;margin-bottom:1rem}
+.tag-sticker{display:inline-flex;align-items:center;gap:6px;background:var(--red);color:#fff;font-family:'Caveat',cursive;font-size:.9rem;font-weight:700;padding:4px 14px;border-radius:2px;box-shadow:2px 2px 0 rgba(0,0,0,.2);transform:rotate(-.8deg)}
+.pulse-dot{width:7px;height:7px;border-radius:50%;background:#fff;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+
+.hero-paper h1{font-family:'Special Elite',cursive;font-size:clamp(2.2rem,5vw,3.8rem);line-height:1.05;color:var(--ink);margin-bottom:.9rem}
+.hero-paper h1 .name-red{color:var(--red)}
+.hero-desc{font-size:1rem;color:var(--ink-light);max-width:460px;margin-bottom:1.5rem;line-height:1.75}
+
+.stats-row{display:flex;gap:1.25rem;flex-wrap:wrap;padding:.9rem 0;border-top:1px dashed rgba(122,74,42,.3);border-bottom:1px dashed rgba(122,74,42,.3);margin-bottom:1.4rem}
+.stat-chip .stat-num{font-family:'Special Elite',cursive;font-size:1.55rem;color:var(--red);line-height:1}
+.stat-chip .stat-lbl{font-size:.7rem;color:var(--ink-light);margin-top:2px}
+.hero-btns{display:flex;gap:.75rem;flex-wrap:wrap}
+
+/* hero sidebar */
+.hero-sidebar{display:flex;flex-direction:column;gap:1rem;padding-top:1rem}
+.polaroid{background:#fff;padding:10px 10px 34px;border:1px solid rgba(0,0,0,.08);box-shadow:3px 4px 0 rgba(122,74,42,.1);transform:rotate(2deg);text-align:center;position:relative}
+.polaroid-inner{width:100%;padding-bottom:100%;background:linear-gradient(135deg,#fce8e8,#dceef8);position:relative;border-radius:1px;overflow:hidden}
+.polaroid-emoji{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:5rem}
+.polaroid-caption{font-family:'Caveat',cursive;font-size:.95rem;color:var(--ink-light);margin-top:7px}
+
+.mini-note{background:#fffde0;border:1px solid rgba(200,160,60,.35);border-radius:2px;padding:.9rem 1rem;box-shadow:2px 3px 0 rgba(200,160,60,.18);transform:rotate(-1.5deg);font-family:'Caveat',cursive;font-size:.92rem;line-height:1.65;color:var(--ink-light);position:relative}
+.mini-note::before{content:'📌';position:absolute;top:-10px;right:12px;font-size:1.1rem}
+
+.gingham-info{padding:1rem;border-radius:3px;background-color:#e8c5c5;background-image:repeating-linear-gradient(0deg,rgba(200,49,43,.15) 0,rgba(200,49,43,.15) 10px,transparent 10px,transparent 20px),repeating-linear-gradient(90deg,rgba(200,49,43,.15) 0,rgba(200,49,43,.15) 10px,transparent 10px,transparent 20px)}
+.gingham-info-inner{background:var(--paper);padding:.65rem 1rem;border-radius:2px;font-family:'Caveat',cursive;font-size:.88rem;color:var(--brown);line-height:1.65}
+
+/* SECTIONS */
+section{padding:5rem 2rem;position:relative}
+.inner{max-width:1050px;margin:0 auto}
+.sec-header{margin-bottom:2.5rem}
+.sec-label{display:inline-block;font-family:'Caveat',cursive;font-size:1rem;font-weight:700;background:var(--red);color:#fff;padding:3px 14px;border-radius:2px;box-shadow:2px 2px 0 rgba(0,0,0,.2);margin-bottom:.65rem;transform:rotate(-.4deg)}
+.sec-title{font-family:'Special Elite',cursive;font-size:clamp(1.55rem,3.5vw,2.3rem);color:var(--ink);line-height:1.15;margin-bottom:.4rem}
+.sec-sub{font-size:.95rem;color:var(--ink-light);max-width:460px;line-height:1.7}
+
+/* ABOUT */
+.about-layout{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:start}
+@media(max-width:680px){.about-layout{grid-template-columns:1fr}}
+.about-paper{padding:2rem;transform:rotate(.25deg)}
+.about-paper p{font-size:.95rem;color:var(--ink-light);margin-bottom:.9rem;line-height:1.75}
+.edu-stack{display:flex;flex-direction:column;gap:.85rem}
+.edu-card{background:var(--paper);border-left:4px solid var(--red);border-radius:0 4px 4px 0;padding:1rem 1.25rem;box-shadow:2px 3px 0 rgba(122,74,42,.1)}
+.edu-card h4{font-family:'Caveat',cursive;font-size:1.1rem;font-weight:700;color:var(--ink);margin-bottom:2px}
+.edu-card .edu-sub{font-size:.8rem;color:var(--ink-light)}
+.edu-badge{display:inline-block;padding:3px 10px;border-radius:2px;font-family:'Caveat',cursive;font-size:.82rem;font-weight:700;margin-top:.45rem;background:var(--red-pale);color:var(--red);border:1px solid rgba(200,49,43,.2)}
+
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:1.2rem}
+.sk-paper{padding:1.4rem;transition:transform .2s,box-shadow .2s}
+.sk-paper:nth-child(odd){transform:rotate(-.35deg)}
+.sk-paper:nth-child(even){transform:rotate(.35deg)}
+.sk-paper:hover{transform:rotate(0) translateY(-4px) !important;box-shadow:5px 7px 0 rgba(122,74,42,.16) !important}
+.sk-icon-wrap{width:42px;height:42px;border-radius:50%;background:var(--red-pale);border:2px solid rgba(200,49,43,.18);display:flex;align-items:center;justify-content:center;font-size:1.25rem;margin-bottom:.8rem}
+.sk-paper h3{font-family:'Caveat',cursive;font-size:1.15rem;font-weight:700;color:var(--ink);margin-bottom:.3rem}
+.sk-paper p{font-size:.82rem;color:var(--ink-light);line-height:1.6;margin-bottom:.85rem}
+.tag-row{display:flex;flex-wrap:wrap;gap:5px}
+.tag{font-family:'Caveat',cursive;font-size:.82rem;padding:2px 10px;border-radius:2px;background:var(--cream2);border:1px solid rgba(122,74,42,.18);color:var(--ink-light)}
+.tag.red{background:var(--red-pale);border-color:rgba(200,49,43,.22);color:var(--red)}
+
+/* PROJECTS */
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem}
+.proj-card{padding:1.65rem;transition:transform .2s,box-shadow .2s;position:relative}
+.proj-card::before{content:'';position:absolute;top:-7px;left:50%;transform:translateX(-50%);width:55px;height:14px;background:var(--tape);border:1px solid rgba(200,160,60,.35);border-radius:2px;z-index:10}
+.proj-card:nth-child(3n+1){transform:rotate(-.4deg)}
+.proj-card:nth-child(3n+2){transform:rotate(.3deg)}
+.proj-card:nth-child(3n+3){transform:rotate(-.15deg)}
+.proj-card:hover{transform:rotate(0) translateY(-5px) !important;box-shadow:6px 8px 0 rgba(122,74,42,.18) !important}
+.proj-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:.85rem}
+.proj-emoji-big{font-size:2rem;line-height:1}
+.proj-badge{font-family:'Caveat',cursive;font-size:.82rem;font-weight:700;padding:3px 12px;border-radius:2px;box-shadow:1px 1px 0 rgba(0,0,0,.12)}
+.b1{background:var(--red);color:#fff}
+.b2{background:var(--green-btn);color:#fff}
+.b3{background:var(--yellow);color:var(--brown)}
+.b4{background:var(--blue-gingham);color:var(--brown)}
+.proj-card h3{font-family:'Caveat',cursive;font-size:1.15rem;font-weight:700;color:var(--ink);margin-bottom:.35rem}
+.proj-card p{font-size:.83rem;color:var(--ink-light);line-height:1.65;margin-bottom:.85rem}
+.proj-stack{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:.85rem}
+.proj-stack span{font-size:.72rem;padding:2px 8px;border-radius:2px;background:var(--cream2);border:1px solid rgba(122,74,42,.16);color:var(--ink-light)}
+.gh-link{display:inline-flex;align-items:center;gap:5px;font-family:'Caveat',cursive;font-size:.95rem;font-weight:700;color:var(--red);text-decoration:none;border-bottom:1.5px dashed var(--red);transition:color .2s}
+.demo-link{display:inline-flex;align-items:center;gap:5px;font-family:'Caveat',cursive;font-size:.95rem;font-weight:700;color:var(--green-dark);text-decoration:none;border-bottom:1.5px dashed var(--green-dark);transition:color .2s;margin-left:.75rem}
+.demo-link:hover{color:var(--green-btn)}
+.gh-link:hover{color:var(--brown)}
+.proj-links{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+.demo-link{display:inline-flex;align-items:center;gap:5px;font-family:'Caveat',cursive;font-size:.95rem;font-weight:700;color:#fff;background:var(--red);text-decoration:none;padding:3px 14px;border-radius:2px;box-shadow:2px 2px 0 var(--brown);transition:transform .15s,box-shadow .15s;margin-left:.5rem}
+.demo-link:hover{transform:translateY(-2px);box-shadow:3px 3px 0 var(--brown)}
+
+/* CONTACT */
+.contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:start}
+@media(max-width:680px){.contact-layout{grid-template-columns:1fr}}
+.contact-paper{padding:1.9rem 2.1rem;transform:rotate(.25deg)}
+.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+@media(max-width:400px){.form-row-2{grid-template-columns:1fr}}
+.fg{display:flex;flex-direction:column;gap:4px;margin-bottom:.8rem}
+.fg label{font-family:'Caveat',cursive;font-size:.95rem;color:var(--ink-light)}
+.fg input,.fg textarea{font-family:'Patrick Hand',cursive;font-size:.95rem;background:var(--cream2);border:1.5px solid rgba(122,74,42,.22);border-bottom:2px solid rgba(122,74,42,.38);border-radius:2px;padding:.58rem .85rem;color:var(--ink);outline:none;width:100%;transition:border-color .2s}
+.fg input:focus,.fg textarea:focus{border-color:var(--red);border-bottom-color:var(--red)}
+.fg textarea{resize:vertical;min-height:100px}
+.submit-btn{width:100%;padding:.8rem;background:var(--red);color:#fff;font-family:'Caveat',cursive;font-size:1.2rem;font-weight:700;border:none;border-radius:2px;cursor:pointer;box-shadow:3px 3px 0 var(--brown);transition:transform .15s,box-shadow .15s;margin-top:.2rem}
+.submit-btn:hover{transform:translateY(-2px);box-shadow:4px 5px 0 var(--brown)}
+.submit-btn:disabled{opacity:.65;cursor:not-allowed;transform:none}
+
+.contact-deco{display:flex;flex-direction:column;gap:1.1rem;padding-top:.25rem}
+.contact-card{background:var(--paper);border:1.5px solid rgba(122,74,42,.14);border-radius:3px;padding:1rem 1.2rem;box-shadow:2px 3px 0 rgba(122,74,42,.1);display:flex;align-items:center;gap:.85rem;text-decoration:none;color:inherit;transition:transform .15s,box-shadow .15s}
+.contact-card:hover{transform:translateY(-2px);box-shadow:3px 5px 0 rgba(122,74,42,.14)}
+.contact-card-icon{font-size:1.4rem;flex-shrink:0}
+.contact-card-label{font-family:'Caveat',cursive;font-size:.8rem;color:var(--ink-light)}
+.contact-card-val{font-family:'Caveat',cursive;font-size:.98rem;font-weight:700;color:var(--red)}
+.gingham-box{padding:1.1rem;border-radius:3px;background-color:#e8c5c5;background-image:repeating-linear-gradient(0deg,rgba(200,49,43,.15) 0,rgba(200,49,43,.15) 10px,transparent 10px,transparent 20px),repeating-linear-gradient(90deg,rgba(200,49,43,.15) 0,rgba(200,49,43,.15) 10px,transparent 10px,transparent 20px);text-align:center}
+.gingham-box p{font-family:'Caveat',cursive;font-size:1rem;color:var(--brown);line-height:1.6}
+
+/* FOOTER */
+footer{text-align:center;padding:1.75rem 1.5rem;border-top:2px dashed rgba(122,74,42,.22);background:rgba(253,246,236,.7)}
+footer p{font-family:'Caveat',cursive;font-size:1.05rem;color:var(--ink-light)}
+
+/* NOTIF */
+#notif-bar{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);padding:.7rem 1.75rem;border-radius:2px;font-family:'Caveat',cursive;font-size:1.1rem;font-weight:700;box-shadow:3px 3px 0 rgba(0,0,0,.2);z-index:999;transition:opacity .3s;pointer-events:none;display:none}
+
+/* FADE UP */
+.fade-up{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+
+/* ── ANIMATED CHARACTERS ── */
+.char-bounce{position:absolute;pointer-events:none;z-index:2;animation:charBounce 2.2s ease-in-out infinite;transform-origin:bottom center}
+@keyframes charBounce{
+  0%,100%{transform:translateY(0) rotate(var(--rot,0deg)) scale(1)}
+  30%{transform:translateY(-22px) rotate(var(--rot,0deg)) scale(1.08)}
+  50%{transform:translateY(-18px) rotate(var(--rot,0deg)) scale(1.05)}
+  70%{transform:translateY(-4px) rotate(var(--rot,0deg)) scale(.98)}
+  85%{transform:translateY(-8px) rotate(var(--rot,0deg)) scale(1.02)}
+}
+.char-swing{position:absolute;pointer-events:none;z-index:2;animation:charSwing 2.8s ease-in-out infinite;transform-origin:top center}
+@keyframes charSwing{
+  0%,100%{transform:rotate(-12deg)}
+  50%{transform:rotate(12deg)}
+}
+.char-spin{position:absolute;pointer-events:none;z-index:2;animation:charSpin 4s linear infinite}
+@keyframes charSpin{
+  0%{transform:rotate(0deg) scale(1)}
+  25%{transform:rotate(90deg) scale(1.15)}
+  50%{transform:rotate(180deg) scale(1)}
+  75%{transform:rotate(270deg) scale(1.15)}
+  100%{transform:rotate(360deg) scale(1)}
+}
+.char-jump{position:absolute;pointer-events:none;z-index:2;animation:charJump 1.8s cubic-bezier(.36,.07,.19,.97) infinite}
+@keyframes charJump{
+  0%,100%{transform:translateY(0) scaleY(1) scaleX(1)}
+  10%{transform:translateY(0) scaleY(.85) scaleX(1.15)}
+  35%{transform:translateY(-30px) scaleY(1.1) scaleX(.92)}
+  60%{transform:translateY(-25px) scaleY(1.05) scaleX(.95)}
+  80%{transform:translateY(-4px) scaleY(.95) scaleX(1.05)}
+  90%{transform:translateY(0) scaleY(.88) scaleX(1.12)}
+}
+.char-float{position:absolute;pointer-events:none;z-index:2;animation:charFloat 3.5s ease-in-out infinite}
+@keyframes charFloat{
+  0%,100%{transform:translateY(0) rotate(var(--r,-6deg))}
+  33%{transform:translateY(-14px) rotate(calc(var(--r,-6deg) + 5deg))}
+  66%{transform:translateY(-8px) rotate(calc(var(--r,-6deg) - 3deg))}
+}
+
+.demo-link{display:inline-flex;align-items:center;gap:5px;font-family:'Caveat',cursive;font-size:.95rem;font-weight:700;color:#fff;background:var(--green-btn);text-decoration:none;padding:4px 14px;border-radius:2px;box-shadow:2px 2px 0 var(--green-dark);transition:transform .15s,box-shadow .15s;margin-left:.5rem}
+.demo-link:hover{transform:translateY(-2px);box-shadow:3px 4px 0 var(--green-dark)}
+.nav-cv-btn{font-family:'Caveat',cursive;font-size:1.05rem;font-weight:700;background:var(--red);color:#fff;border:none;border-radius:2px;padding:5px 16px;cursor:pointer;box-shadow:2px 2px 0 var(--brown);transition:transform .15s,box-shadow .15s}
+.nav-cv-btn:hover{transform:translateY(-1px);box-shadow:3px 3px 0 var(--brown)}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--cream)}
+::-webkit-scrollbar-thumb{background:var(--brown-light);border-radius:3px}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="logo">Ay<span>.dev 🍓</span></a>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><button class="nav-cv-btn" onclick="openCvModal()">&#128196; Lihat CV</button></li>
+  </ul>
+</nav>
+
+<!-- CV MODAL -->
+<div id="cv-modal" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(42,26,14,.72);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:1.5rem">
+  <div style="background:var(--paper);border:2px solid rgba(122,74,42,.18);border-radius:4px;box-shadow:8px 10px 0 rgba(122,74,42,.18);width:100%;max-width:820px;max-height:90vh;display:flex;flex-direction:column;position:relative">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.25rem;border-bottom:1.5px dashed rgba(122,74,42,.25)">
+      <div style="display:flex;align-items:center;gap:.6rem">
+        <div style="background:var(--red);color:#fff;font-family:Caveat,cursive;font-size:.85rem;font-weight:700;padding:3px 12px;border-radius:2px;box-shadow:2px 2px 0 rgba(0,0,0,.18)">&#128196; CV</div>
+        <span style="font-family:Special Elite,cursive;font-size:1.05rem;color:var(--ink)">Norma Zuhrotul Hayati</span>
+      </div>
+      <div style="display:flex;gap:.6rem;align-items:center">
+        <a href="/static/cv-norma.pdf" download="CV_Norma_Zuhrotul_Hayati.pdf" class="btn-red" style="font-size:.88rem;padding:.4rem 1rem;transform:none">&#11015; Download</a>
+        <button onclick="closeCvModal()" style="background:none;border:none;cursor:pointer;font-size:1.4rem;color:var(--ink-light);line-height:1;padding:4px">&#10005;</button>
+      </div>
+    </div>
+    <div style="flex:1;overflow:auto;padding:.75rem;min-height:400px">
+      <iframe src="/static/cv-norma.pdf" style="width:100%;height:72vh;border:none;border-radius:2px" title="CV Norma Zuhrotul Hayati"></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <!-- floating animated characters -->
+  <!-- strawberry yang bouncing -->
+  <div class="char-bounce" style="top:15%;left:4%;font-size:3rem;animation-delay:0s;--rot:-10deg">🍓</div>
+  <!-- boneka beruang yang goyang -->
+  <div class="char-swing" style="top:20%;right:6%;font-size:2.8rem;animation-delay:.4s">🧸</div>
+  <!-- bintang yang spin -->
+  <div class="char-spin" style="bottom:28%;left:6%;font-size:2.2rem;animation-delay:.8s">⭐</div>
+  <!-- kucing yang melompat -->
+  <div class="char-jump" style="top:55%;right:4%;font-size:2.5rem;animation-delay:.2s">🐱</div>
+  <!-- bunga yang goyang -->
+  <div class="char-swing" style="bottom:35%;right:14%;font-size:2rem;animation-delay:1s">🌸</div>
+  <!-- strawberry kecil -->
+  <div class="char-bounce" style="top:72%;left:3%;font-size:1.8rem;animation-delay:1.5s;--rot:8deg">🍓</div>
+  <!-- robot AI -->
+  <div class="char-float" style="top:38%;left:2%;font-size:2rem;animation-delay:.6s;--r:-6deg">🤖</div>
+  <!-- pita -->
+  <div class="char-spin" style="bottom:15%;right:8%;font-size:1.6rem;animation-delay:1.2s">🎀</div>
+
+  <div class="hero-board">
+    <!-- main paper -->
+    <div class="paper-card hero-paper">
+      <div class="pin"></div>
+      <div class="tape" style="top:-8px;left:28px;width:68px;height:17px;transform:rotate(-2deg)"></div>
+      <div class="tape" style="top:-8px;right:40px;width:45px;height:17px;transform:rotate(1.5deg)"></div>
+
+      <div class="hero-tag-row">
+        <div class="tag-sticker"><div class="pulse-dot"></div>Open to Work</div>
+      </div>
+
+      <h1>Norma<br>Zuhrotul<br><span class="name-red">Hayati</span></h1>
+
+      <p class="hero-desc">
+        Fresh graduate AI & Data Engineer dari Universitas Negeri Semarang — passionate di Machine Learning, LLMs, Explainable AI, dan sistem cerdas berbasis data ✨
+      </p>
+
+      <div class="stats-row">
+        <div class="stat-chip"><div class="stat-num">3.65</div><div class="stat-lbl">GPA · Honours</div></div>
+        <div class="stat-chip"><div class="stat-num">7+</div><div class="stat-lbl">GitHub Repos</div></div>
+        <div class="stat-chip"><div class="stat-num">81.7%</div><div class="stat-lbl">Akurasi Thesis</div></div>
+        <div class="stat-chip"><div class="stat-num">6 bln</div><div class="stat-lbl">Internship</div></div>
+      </div>
+
+      <div class="hero-btns">
+        <a href="#projects" class="btn-red">Lihat Projects →</a>
+        <a href="#contact" class="btn-outline">Hubungi Saya 🌷</a>
+        <button class="btn-outline" onclick="openCvModal()" style="border-color:var(--red);color:var(--red)">📄 Lihat CV</button>
+      </div>
+    </div>
+
+    <!-- sidebar scrapbook -->
+    <div class="hero-sidebar">
+      <div class="polaroid">
+        <div class="polaroid-inner" style="padding-bottom:0;height:280px;overflow:hidden">
+          <img src="/static/norma-photo.png" alt="Norma Zuhrotul Hayati" style="width:100%;height:100%;object-fit:cover;object-position:top center;border-radius:1px"/>
+        </div>
+        <div class="polaroid-caption">Norma Zuhrotul Hayati</div>
+        <div class="tape" style="top:-10px;left:50%;transform:translateX(-50%);width:48px;height:14px"></div>
+      </div>
+      <div class="mini-note">
+        "AI yang baik bukan hanya akurat, tapi juga transparan dan dapat dipercaya oleh manusia 🤍"
+        <div style="font-size:.78rem;margin-top:.35rem;color:var(--brown-light)">— Norma, 2025</div>
+      </div>
+      <div class="gingham-info">
+        <div class="gingham-info-inner">
+          📍 Semarang, Indonesia<br>
+          🎓 S1 Teknik Informatika, UNNES<br>
+          💼 Data Science Intern @ PT. DataIns
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="inner">
+    <div class="sec-header fade-up">
+      <div class="sec-label">✦ About Me</div>
+      <h2 class="sec-title">Data & AI enthusiast<br>dari Semarang 🍵</h2>
+    </div>
+    <div class="about-layout">
+      <div class="paper-card about-paper fade-up">
+        <div class="tape" style="top:-8px;left:18px;width:60px;height:16px;transform:rotate(-1.5deg)"></div>
+        <p>Saya fresh graduate Teknik Informatika dari Universitas Negeri Semarang (2025) dengan fokus di data analytics, machine learning, dan kecerdasan buatan.</p>
+        <p>Thesis saya mengoptimasi klasifikasi credit card default menggunakan ANN dengan XGBoost feature selection, SMOTE balancing, dan Hybrid Explainable AI (SHAP + LIME) — mencapai akurasi 81.7%.</p>
+        <p>Saya percaya AI yang baik bukan hanya akurat, tapi juga transparan dan dapat dipercaya oleh manusia. Saya senang mengubah temuan teknis menjadi rekomendasi bisnis yang actionable 🌷</p>
+        <a href="#contact" class="btn-red" style="display:inline-block;margin-top:1rem">Kerja Sama →</a>
+      </div>
+      <div class="fade-up" style="transition-delay:.15s">
+        <div style="font-family:'Caveat',cursive;font-size:.95rem;font-weight:700;color:var(--red);margin-bottom:.85rem;letter-spacing:.04em">📚 EDUCATION & EXPERIENCE</div>
+        <div class="edu-stack">
+          <div class="edu-card">
+            <h4>S1 Teknik Informatika</h4>
+            <div class="edu-sub">Universitas Negeri Semarang · 2021–2025</div>
+            <div class="edu-badge">GPA 3.65 · With Honours 🎓</div>
+          </div>
+          <div class="edu-card">
+            <h4>Data Science Intern</h4>
+            <div class="edu-sub">PT. DataIns, Yogyakarta · Aug 2023 – Jan 2024</div>
+            <div class="edu-badge" style="background:var(--blue-light);color:var(--brown);border-color:rgba(184,212,232,.5)">LLM · NLP · Streamlit 💻</div>
+          </div>
+          <div class="edu-card">
+            <h4>SMAN 7 Semarang</h4>
+            <div class="edu-sub">IPA · 2018–2021 · Nilai Akhir 83.53</div>
+            <div class="edu-badge" style="background:#e8f5e8;color:var(--green-dark);border-color:rgba(143,173,106,.3)">Matematika & IPA 🌿</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="inner">
+    <div class="sec-header fade-up">
+      <div class="sec-label">✦ Expertise</div>
+      <h2 class="sec-title">Skills & Tools 🛠️</h2>
+      <p class="sec-sub">Kemampuan yang dibangun dari proyek nyata, internship, dan riset akademik.</p>
+    </div>
+    <div class="skills-grid">
+      <div class="paper-card sk-paper fade-up">
+        <div class="sk-icon-wrap">🤖</div>
+        <h3>Machine Learning & Deep Learning</h3>
+        <p>ANN, XGBoost, SMOTE, hyperparameter tuning, evaluasi model end-to-end dari preprocessing hingga deployment.</p>
+        <div class="tag-row"><span class="tag red">PyTorch</span><span class="tag red">TensorFlow</span><span class="tag">Scikit-learn</span><span class="tag">XGBoost</span></div>
+      </div>
+      <div class="paper-card sk-paper fade-up" style="transition-delay:.07s">
+        <div class="sk-icon-wrap">💬</div>
+        <h3>LLM & NLP</h3>
+        <p>Integrasi GPT-3, Hugging Face, LangChain; PDF analysis, RAG pipeline, dan keyword search via API.</p>
+        <div class="tag-row"><span class="tag red">LangChain</span><span class="tag red">OpenAI</span><span class="tag">Hugging Face</span><span class="tag">NLP</span></div>
+      </div>
+      <div class="paper-card sk-paper fade-up" style="transition-delay:.14s">
+        <div class="sk-icon-wrap">🔍</div>
+        <h3>Explainable AI</h3>
+        <p>Hybrid SHAP + LIME untuk interpretabilitas model — membuat AI transparan dan dapat dipercaya stakeholder.</p>
+        <div class="tag-row"><span class="tag red">SHAP</span><span class="tag red">LIME</span><span class="tag">XAI</span></div>
+      </div>
+      <div class="paper-card sk-paper fade-up" style="transition-delay:.04s">
+        <div class="sk-icon-wrap">📊</div>
+        <h3>Data Analysis & Viz</h3>
+        <p>EDA, statistical testing, Tukey Test, dan visualisasi insight yang actionable untuk keputusan bisnis.</p>
+        <div class="tag-row"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">PowerBI</span><span class="tag">RStudio</span></div>
+      </div>
+      <div class="paper-card sk-paper fade-up" style="transition-delay:.11s">
+        <div class="sk-icon-wrap">🖥️</div>
+        <h3>App Development</h3>
+        <p>UI interaktif dengan Streamlit, web dengan HTML/CSS/JS, serta desktop app Java dan NetBeans IDE.</p>
+        <div class="tag-row"><span class="tag red">Streamlit</span><span class="tag">FastAPI</span><span class="tag">HTML/CSS</span><span class="tag">Java</span></div>
+      </div>
+      <div class="paper-card sk-paper fade-up" style="transition-delay:.18s">
+        <div class="sk-icon-wrap">🗄️</div>
+        <h3>Database & Programming</h3>
+        <p>Desain relational database, SQL query optimization, dan pengembangan multi-bahasa pemrograman.</p>
+        <div class="tag-row"><span class="tag red">SQL</span><span class="tag">Python</span><span class="tag">R</span><span class="tag">C++</span><span class="tag">JavaScript</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="inner">
+    <div class="sec-header fade-up">
+      <div class="sec-label">✦ Portfolio</div>
+      <h2 class="sec-title">GitHub Projects 🗂️</h2>
+      <p class="sec-sub">Proyek nyata dari riset akademik, internship, dan eksplorasi pribadi di dunia AI & data.</p>
+    </div>
+    <div class="proj-grid">
+      <div class="paper-card proj-card fade-up">
+        <div class="proj-top"><div class="proj-emoji-big">🧠</div><span class="proj-badge b1">Thesis · XAI</span></div>
+        <h3>Credit Card Default – ANN + XAI</h3>
+        <p>Model prediksi credit risk dengan ANN, XGBoost feature selection, SMOTE, dan Hybrid XAI (SHAP + LIME). Akurasi 81.7% — project skripsi S1.</p>
+        <div class="proj-stack"><span>Python</span><span>ANN</span><span>XGBoost</span><span>SHAP</span><span>LIME</span></div>
+        <div class="proj-links">
+          <a href="https://github.com/NormaAyaa/Default--Credit-Card" target="_blank" rel="noopener" class="gh-link">↗ GitHub Repo</a>
+          <a href="https://default--credit-card.streamlit.app/" target="_blank" rel="noopener" class="demo-link">▶ Live Demo</a>
+        </div>
+      </div>
+      <div class="paper-card proj-card fade-up" style="transition-delay:.09s">
+        <div class="proj-top"><div class="proj-emoji-big">💬</div><span class="proj-badge b2">LLM · Internship</span></div>
+        <h3>CHAT-MULTI-PDF</h3>
+        <p>Sistem analisis dokumen PDF berbasis LLM dengan keyword search dan NLP pipeline menggunakan LangChain dan OpenAI GPT-3. Dibuat saat internship PT. DataIns.</p>
+        <div class="proj-stack"><span>LangChain</span><span>OpenAI GPT-3</span><span>Streamlit</span><span>Python</span></div>
+        <div class="proj-links">
+          <a href="https://github.com/NormaAyaa/CHAT-MULTI-PDF" target="_blank" rel="noopener" class="gh-link">↗ GitHub Repo</a>
+        </div>
+      </div>
+      <div class="paper-card proj-card fade-up" style="transition-delay:.18s">
+        <div class="proj-top"><div class="proj-emoji-big">🤖</div><span class="proj-badge b3">AI · Streamlit</span></div>
+        <h3>RetainAI – Streamlit</h3>
+        <p>Aplikasi AI berbasis Streamlit untuk customer retention analysis, dengan UI interaktif dan integrasi model machine learning secara real-time.</p>
+        <div class="proj-stack"><span>Streamlit</span><span>Python</span><span>ML</span></div>
+        <div class="proj-links">
+          <a href="https://github.com/NormaAyaa/RetainAI-Streamlit" target="_blank" rel="noopener" class="gh-link">↗ GitHub Repo</a>
+          <a href="https://retainai-app.streamlit.app/" target="_blank" rel="noopener" class="demo-link">▶ Live Demo</a>
+        </div>
+      </div>
+      <div class="paper-card proj-card fade-up" style="transition-delay:.04s">
+        <div class="proj-top"><div class="proj-emoji-big">🕵️</div><span class="proj-badge b4">Deep Learning</span></div>
+        <h3>Deep Fake Detector</h3>
+        <p>Sistem deteksi deepfake menggunakan deep learning — mengidentifikasi konten gambar yang dimanipulasi AI dengan model klasifikasi neural network.</p>
+        <div class="proj-stack"><span>Deep Learning</span><span>Python</span><span>Computer Vision</span></div>
+        <div class="proj-links">
+          <a href="https://github.com/NormaAyaa/Deep-Fake-Detector" target="_blank" rel="noopener" class="gh-link">↗ GitHub Repo</a>
+          <a href="https://deepfake-detector-ai.streamlit.app/" target="_blank" rel="noopener" class="demo-link">▶ Live Demo</a>
+        </div>
+      </div>
+      <div class="paper-card proj-card fade-up" style="transition-delay:.13s">
+        <div class="proj-top"><div class="proj-emoji-big">🏥</div><span class="proj-badge b1">Healthcare AI</span></div>
+        <h3>AI-Triase-UGD</h3>
+        <p>Sistem AI untuk triage pasien di UGD — membantu tenaga medis memprioritaskan penanganan pasien secara cerdas dan cepat.</p>
+        <div class="proj-stack"><span>Python</span><span>ML</span><span>Healthcare AI</span></div>
+        <div class="proj-links">
+          <a href="https://github.com/NormaAyaa/AI-Triase-UGD" target="_blank" rel="noopener" class="gh-link">↗ GitHub Repo</a>
+          <a href="https://ai-triase-ugd.streamlit.app/" target="_blank" rel="noopener" class="demo-link">▶ Live Demo</a>
+        </div>
+      </div>
+      <div class="paper-card proj-card fade-up" style="transition-delay:.22s">
+        <div class="proj-top"><div class="proj-emoji-big">💳</div><span class="proj-badge b2">ML · Finance</span></div>
+        <h3>Default Credit Card</h3>
+        <p>Analisis dan prediksi credit card default dengan EDA mendalam dan model baseline machine learning sebagai fondasi riset thesis utama.</p>
+        <div class="proj-stack"><span>Python</span><span>Scikit-learn</span><span>Pandas</span><span>EDA</span></div>
+        <div class="proj-links">
+          <a href="https://github.com/NormaAyaa/Default--Credit-Card" target="_blank" rel="noopener" class="gh-link">↗ GitHub Repo</a>
+          <a href="https://default--credit-card.streamlit.app/" target="_blank" rel="noopener" class="demo-link">▶ Live Demo</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="inner">
+    <div class="sec-header fade-up">
+      <div class="sec-label">✦ Contact</div>
+      <h2 class="sec-title">Mari berkolaborasi! 🌸</h2>
+      <p class="sec-sub">Tertarik bekerja sama atau punya proyek AI yang menarik? Kirim pesan!</p>
+    </div>
+    <div class="contact-layout">
+      <div class="paper-card contact-paper fade-up">
+        <div class="tape" style="top:-8px;left:18px;width:62px;height:16px;transform:rotate(-1deg)"></div>
+        <div class="form-row-2">
+          <div class="fg"><label>Nama ✏️</label><input type="text" id="c-name" placeholder="Nama kamu" autocomplete="name"/></div>
+          <div class="fg"><label>Email 📮</label><input type="email" id="c-email" placeholder="email@kamu.com" autocomplete="email"/></div>
+        </div>
+        <div class="fg"><label>Subjek 📌</label><input type="text" id="c-subject" placeholder="Topik pembicaraan..."/></div>
+        <div class="fg"><label>Pesan 🌷</label><textarea id="c-msg" placeholder="Ceritakan proyekmu atau pertanyaan kamu..."></textarea></div>
+        <button class="submit-btn" id="submitBtn">Kirim Pesan 🍓</button>
+      </div>
+
+      <div class="contact-deco fade-up" style="transition-delay:.15s">
+        <a href="mailto:normasucicd@gmail.com" class="contact-card">
+          <div class="contact-card-icon">✉️</div>
+          <div><div class="contact-card-label">Email</div><div class="contact-card-val">normasucicd@gmail.com</div></div>
+        </a>
+        <a href="https://github.com/NormaAyaa" target="_blank" rel="noopener" class="contact-card">
+          <div class="contact-card-icon">⌥</div>
+          <div><div class="contact-card-label">GitHub</div><div class="contact-card-val">github.com/NormaAyaa</div></div>
+        </a>
+        <a href="https://wa.me/6288802661893" target="_blank" rel="noopener" class="contact-card">
+          <div class="contact-card-icon">📞</div>
+          <div><div class="contact-card-label">Phone</div><div class="contact-card-val">+62 888 0266 1893</div></div>
+        </a>
+        <div class="gingham-box">
+          <p>✨ Selalu senang berdiskusi tentang AI, data, dan kolaborasi proyek keren!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Made with 🍓 · Norma Zuhrotul Hayati · Semarang, Indonesia · 2026</p>
+</footer>
+
+<div id="notif-bar"></div>
+
+<script>
+/* hamburger */
+document.getElementById('hamburger').addEventListener('click',()=>{document.getElementById('navLinks').classList.toggle('open')});
+document.querySelectorAll('#navLinks a').forEach(a=>{a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open'))});
+/* smooth scroll */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'})}})});
+/* fade-up */
+const obs=new IntersectionObserver(entries=>{entries.forEach(el=>{if(el.isIntersecting){el.target.classList.add('visible');obs.unobserve(el.target)}})},{threshold:.1});
+document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+/* contact */
+document.getElementById('submitBtn').addEventListener('click',async()=>{
+  const name=document.getElementById('c-name').value.trim();
+  const email=document.getElementById('c-email').value.trim();
+  const subject=document.getElementById('c-subject').value.trim();
+  const msg=document.getElementById('c-msg').value.trim();
+  if(!name||!email||!msg){showNotif('Mohon isi Nama, Email, dan Pesan dulu ya! 🌷','error');return}
+  const btn=document.getElementById('submitBtn');btn.disabled=true;btn.textContent='Mengirim... 🍓';
+  try{
+    const res=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,email,subject,message:msg})});
+    const data=await res.json();
+    if(data.ok){showNotif(data.message,'success');['c-name','c-email','c-subject','c-msg'].forEach(id=>document.getElementById(id).value='')}
+    else{showNotif(data.error||'Terjadi kesalahan.','error')}
+  }catch{showNotif('Gagal terhubung ke server.','error')}
+  btn.disabled=false;btn.textContent='Kirim Pesan 🍓';
+});
+function openCvModal(){
+  const m=document.getElementById('cv-modal');
+  m.style.display='flex';
+  document.body.style.overflow='hidden';
+}
+function closeCvModal(){
+  const m=document.getElementById('cv-modal');
+  m.style.display='none';
+  document.body.style.overflow='';
+}
+document.getElementById('cv-modal').addEventListener('click',function(e){
+  if(e.target===this) closeCvModal();
+});
+document.addEventListener('keydown',function(e){if(e.key==='Escape') closeCvModal();});
+function showNotif(text,type){
+  const el=document.getElementById('notif-bar');
+  el.style.display='block';el.textContent=text;
+  el.style.background=type==='success'?'#8fad6a':'#c8312b';el.style.color='#fff';el.style.opacity='1';
+  clearTimeout(el._t);el._t=setTimeout(()=>{el.style.opacity='0';setTimeout(()=>{el.style.display='none'},300)},4000);
+}
+</script>
+</body>
+</html>
