@@ -50,6 +50,11 @@ export default function Navbar({ onOpenCv }: NavbarProps) {
             </a>
           </li>
           <li>
+            <a href="#education" onClick={(e) => handleNavClick(e, '#education')}>
+              Certificates
+            </a>
+          </li>
+          <li>
             <a href="#why-me" onClick={(e) => handleNavClick(e, '#why-me')}>
               Why Me
             </a>

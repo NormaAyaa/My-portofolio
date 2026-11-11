@@ -32,6 +32,20 @@ export interface EducationItem {
   badgeStyle?: string;
 }
 
+export interface CertificateItem {
+  id: string;
+  title: string;
+  issuer: string;
+  organizer: string;
+  credentialId: string;
+  date: string;
+  hours: string;
+  description: string;
+  skills: string[];
+  image: string;
+  verified: boolean;
+}
+
 export interface SkillCategory {
   icon: string;
   title: string;
@@ -112,6 +126,30 @@ export const educationHistory: EducationItem[] = [
     sub: "IPA · 2018–2021 · Nilai Akhir 83.53",
     badge: "Matematika & IPA 🌿",
     badgeStyle: "background:#e8f5e8;color:var(--green-dark);border-color:rgba(143,173,106,.3)",
+  },
+];
+
+export const certificatesList: CertificateItem[] = [
+  {
+    id: "kemnaker-plan-web-ai",
+    title: "Pelatihan Web Programming dengan Pemanfaatan AI",
+    issuer: "Kementerian Ketenagakerjaan Republik Indonesia & Yayasan Plan International Indonesia",
+    organizer: "Balai Besar Pelatihan Vokasi dan Produktivitas (BBPVP) Semarang",
+    credentialId: "PLAN/BOOTCAMPWP/202601",
+    date: "30 Oktober 2026",
+    hours: "112 Jam Pelatihan (112 Learning Hours)",
+    description:
+      "Sertifikat kelulusan resmi Future Innovators Bootcamp yang diselenggarakan oleh Plan Indonesia bersama BBPVP Semarang Kemnaker RI. Pelatihan komprehensif selama 112 jam ini membekali peserta dengan keterampilan rekayasa web modern, integrasi automasi AI, prompt engineering, arsitektur aplikasi berbasis data, dan kolaborasi project standar industri.",
+    skills: [
+      "Web Programming",
+      "Pemanfaatan AI",
+      "Frontend & Backend",
+      "Prompt Engineering",
+      "Problem Solving",
+      "112 Jam Bersertifikat",
+    ],
+    image: "/sertifikat-kemnaker-plan-ai.jpg",
+    verified: true,
   },
 ];
 
