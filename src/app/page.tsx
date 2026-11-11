@@ -5,7 +5,10 @@ import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
 import Skills from '@/components/Skills';
+import WhatsInMyBag from '@/components/WhatsInMyBag';
 import Projects from '@/components/Projects';
+import WhyWorkWithMe from '@/components/WhyWorkWithMe';
+import Certificates from '@/components/Certificates';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import CvModal from '@/components/CvModal';
@@ -30,7 +33,6 @@ export default function Home() {
     []
   );
 
-  // Auto-dismiss notification after 4 seconds
   useEffect(() => {
     if (!notification.isVisible) return;
 
@@ -41,33 +43,17 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, [notification.isVisible]);
 
-  // Fade-up scroll intersection observer
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    const elements = document.querySelectorAll('.fade-up');
-    elements.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <main>
       <Navbar onOpenCv={() => setIsCvOpen(true)} />
       <Hero onOpenCv={() => setIsCvOpen(true)} />
       <About />
       <Skills />
+      {/* "What's in my bag" visual component matching video */}
+      <WhatsInMyBag />
       <Projects />
+      <WhyWorkWithMe />
+      <Certificates />
       <Contact onNotify={showNotification} />
       <Footer />
 

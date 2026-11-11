@@ -31,7 +31,7 @@ export default function Contact({ onNotify }: ContactProps) {
     const { name, email, subject, message } = formData;
 
     if (!name.trim() || !email.trim() || !message.trim()) {
-      onNotify('Mohon isi Nama, Email, dan Pesan dulu ya! 🌷', 'error');
+      onNotify('Mohon isi Nama, Email, dan Pesan terlebih dahulu 🌷', 'error');
       return;
     }
 
@@ -59,10 +59,7 @@ export default function Contact({ onNotify }: ContactProps) {
           message: '',
         });
       } else {
-        onNotify(
-          'Gagal mengirim pesan ke Netlify. Silakan coba lagi nanti.',
-          'error'
-        );
+        onNotify('Gagal mengirim pesan ke Netlify. Silakan coba lagi nanti.', 'error');
       }
     } catch {
       onNotify(
@@ -75,29 +72,22 @@ export default function Contact({ onNotify }: ContactProps) {
   };
 
   return (
-    <section id="contact">
-      <div className="inner">
-        <div className="sec-header fade-up">
-          <div className="sec-label">✦ Contact</div>
-          <h2 className="sec-title">Mari berkolaborasi! 🌸</h2>
-          <p className="sec-sub">
-            Tertarik bekerja sama atau punya proyek AI yang menarik? Kirim pesan!
+    <section id="contact" className="canva-page-wrapper">
+      <div className="canva-contact-section">
+        <div className="canva-pill-header-wrap">
+          <div className="canva-section-pill">Contact Me</div>
+          <p className="canva-section-subtitle">
+            Let&apos;s build intelligent, explainable, and trustworthy AI solutions together.
           </p>
         </div>
 
-        <div className="contact-layout">
-          {/* Contact form card */}
-          <div className="paper-card contact-paper fade-up">
-            <div
-              className="tape"
-              style={{
-                top: '-8px',
-                left: '18px',
-                width: '62px',
-                height: '16px',
-                transform: 'rotate(-1deg)',
-              }}
-            ></div>
+        <div className="canva-contact-grid">
+          {/* Left Column: Contact Form */}
+          <div className="canva-contact-form-card">
+            <h3 className="canva-form-title">Send a Message</h3>
+            <p className="canva-form-sub">
+              Feel free to reach out anytime for collaboration, project inquiries, or job opportunities.
+            </p>
 
             <form
               name="contact"
@@ -106,7 +96,6 @@ export default function Contact({ onNotify }: ContactProps) {
               data-netlify-honeypot="bot-field"
               onSubmit={handleSubmit}
             >
-              {/* Hidden field for Netlify Forms routing */}
               <input type="hidden" name="form-name" value="contact" />
               <p hidden>
                 <label>
@@ -115,35 +104,42 @@ export default function Contact({ onNotify }: ContactProps) {
                 </label>
               </p>
 
-              <div className="form-row-2">
-                <div className="fg">
-                  <label htmlFor="c-name">Nama ✏️</label>
-                  <input
-                    type="text"
-                    id="c-name"
-                    name="name"
-                    placeholder="Nama kamu"
-                    autoComplete="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="fg">
-                  <label htmlFor="c-email">Email 📮</label>
-                  <input
-                    type="email"
-                    id="c-email"
-                    name="email"
-                    placeholder="email@kamu.com"
-                    autoComplete="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                  />
-                </div>
+              <div className="canva-input-group">
+                <label htmlFor="c-name" className="canva-input-label">
+                  Nama Lengkap ✏️
+                </label>
+                <input
+                  type="text"
+                  id="c-name"
+                  name="name"
+                  placeholder="Nama kamu"
+                  autoComplete="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="canva-input-field"
+                />
               </div>
 
-              <div className="fg">
-                <label htmlFor="c-subject">Subjek 📌</label>
+              <div className="canva-input-group">
+                <label htmlFor="c-email" className="canva-input-label">
+                  Alamat Email 📮
+                </label>
+                <input
+                  type="email"
+                  id="c-email"
+                  name="email"
+                  placeholder="email@kamu.com"
+                  autoComplete="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="canva-input-field"
+                />
+              </div>
+
+              <div className="canva-input-group">
+                <label htmlFor="c-subject" className="canva-input-label">
+                  Subjek Pesan 📌
+                </label>
                 <input
                   type="text"
                   id="c-subject"
@@ -151,54 +147,81 @@ export default function Contact({ onNotify }: ContactProps) {
                   placeholder="Topik pembicaraan..."
                   value={formData.subject}
                   onChange={handleChange}
+                  className="canva-input-field"
                 />
               </div>
 
-              <div className="fg">
-                <label htmlFor="c-msg">Pesan 🌷</label>
+              <div className="canva-input-group">
+                <label htmlFor="c-msg" className="canva-input-label">
+                  Isi Pesan 🌷
+                </label>
                 <textarea
                   id="c-msg"
                   name="message"
-                  placeholder="Ceritakan proyekmu atau pertanyaan kamu..."
+                  placeholder="Ceritakan tentang proyek atau ide kolaborasimu..."
                   value={formData.message}
                   onChange={handleChange}
+                  className="canva-textarea-field"
                 ></textarea>
               </div>
 
               <button
                 type="submit"
-                className="submit-btn"
+                className="canva-btn-brown"
+                style={{ width: '100%', padding: '0.9rem', fontSize: '1rem', marginTop: '0.5rem' }}
                 disabled={isSubmitting}
               >
-                {isSubmitting ? 'Mengirim... 🍓' : 'Kirim Pesan 🍓'}
+                {isSubmitting ? 'Mengirim... 🍓' : 'Send Message 🌸'}
               </button>
             </form>
           </div>
 
-          {/* Social and contact details */}
-          <div
-            className="contact-deco fade-up"
-            style={{ transitionDelay: '0.15s' }}
-          >
+          {/* Right Column: "Let's work together!" & Contact Cards */}
+          <div className="canva-contact-info-wrap">
+            <div style={{ marginBottom: '0.5rem' }}>
+              <h2
+                style={{
+                  fontFamily: "var(--font-serif), Georgia, serif",
+                  fontSize: '2.4rem',
+                  fontWeight: 700,
+                  color: 'var(--canva-text)',
+                  lineHeight: 1.15,
+                  marginBottom: '0.85rem',
+                }}
+              >
+                Let&apos;s work <br />
+                together! 🌸
+              </h2>
+              <p
+                style={{
+                  fontSize: '1.02rem',
+                  color: 'var(--canva-text-muted)',
+                  lineHeight: 1.7,
+                }}
+              >
+                Whether you&apos;re looking for a dedicated AI & Data Engineer, a collaborator for machine learning research, or an end-to-end data pipeline builder — I&apos;d love to hear about your project!
+              </p>
+            </div>
+
             {personalInfo.contacts.map((c, idx) => (
               <a
                 key={idx}
                 href={c.href}
                 target={c.type !== 'email' ? '_blank' : undefined}
                 rel={c.type !== 'email' ? 'noopener noreferrer' : undefined}
-                className="contact-card"
+                className="canva-contact-card-item"
               >
-                <div className="contact-card-icon">{c.icon}</div>
+                <div className="canva-contact-icon">{c.icon}</div>
                 <div>
-                  <div className="contact-card-label">{c.label}</div>
-                  <div className="contact-card-val">{c.val}</div>
+                  <div className="canva-contact-label">{c.label}</div>
+                  <div className="canva-contact-val">{c.val}</div>
                 </div>
               </a>
             ))}
 
-            <div className="gingham-box">
+            <div className="canva-contact-quote-card">
               <p>
-                ✨ Selalu senang berdiskusi tentang AI, data, dan kolaborasi proyek keren!
+                ✨ &ldquo;Always excited to discuss AI, data systems, and impactful technology projects!&rdquo;
               </p>
             </div>
           </div>

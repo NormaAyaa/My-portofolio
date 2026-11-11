@@ -1,38 +1,17 @@
 import type { Metadata } from 'next';
-import { Patrick_Hand, Caveat, Special_Elite } from 'next/font/google';
 import './globals.css';
 
-const patrickHand = Patrick_Hand({
-  weight: ['400'],
-  subsets: ['latin'],
-  variable: '--font-patrick-hand',
-  display: 'swap',
-});
-
-const caveat = Caveat({
-  weight: ['400', '600', '700'],
-  subsets: ['latin'],
-  variable: '--font-caveat',
-  display: 'swap',
-});
-
-const specialElite = Special_Elite({
-  weight: ['400'],
-  subsets: ['latin'],
-  variable: '--font-special-elite',
-  display: 'swap',
-});
-
 export const metadata: Metadata = {
-  title: 'Norma Zuhrotul Hayati 🍓',
-  description: 'Norma Zuhrotul Hayati – AI & Data Engineer Portfolio',
+  title: 'Norma Zuhrotul Hayati | AI & Data Engineer',
+  description:
+    'Portfolio of Norma Zuhrotul Hayati – AI & Data Engineer specializing in Machine Learning, Explainable AI (SHAP + LIME), and LLMs.',
   keywords: [
     'Norma Zuhrotul Hayati',
     'AI Engineer',
     'Data Engineer',
     'Machine Learning',
-    'Portfolio',
     'Explainable AI',
+    'Portfolio',
   ],
 };
 
@@ -42,10 +21,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="id"
-      className={`${patrickHand.variable} ${caveat.variable} ${specialElite.variable}`}
-    >
+    <html lang="id">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body>{children}</body>
     </html>
   );

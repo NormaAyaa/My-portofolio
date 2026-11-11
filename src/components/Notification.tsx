@@ -17,17 +17,15 @@ export default function Notification({
 
   return (
     <div
-      id="notif-bar"
-      className="notif-bar"
+      className="modern-toast"
       style={{
-        display: 'block',
-        backgroundColor: type === 'success' ? '#8fad6a' : '#c8312b',
-        color: '#fff',
-        opacity: isVisible ? 1 : 0,
+        backgroundColor: type === 'success' ? '#2e7d32' : '#c62828',
+        color: '#ffffff',
       }}
       role="alert"
     >
-      {message}
+      <span>{type === 'success' ? '🌸' : '⚠️'}</span>
+      <span>{message}</span>
     </div>
   );
 }

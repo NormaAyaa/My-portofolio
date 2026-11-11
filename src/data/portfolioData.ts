@@ -43,6 +43,7 @@ export interface ProjectItem {
   title: string;
   description: string;
   emoji: string;
+  category: 'ai' | 'web' | 'other';
   badge: {
     text: string;
     class: 'b1' | 'b2' | 'b3' | 'b4';
@@ -65,7 +66,7 @@ export const personalInfo: PersonalInfo = {
   workSummary: "💼 Data Science Intern @ PT. DataIns",
   stats: [
     { num: "3.65", lbl: "GPA · Honours" },
-    { num: "7+", lbl: "GitHub Repos" },
+    { num: "20", lbl: "GitHub Repos" },
     { num: "81.7%", lbl: "Akurasi Thesis" },
     { num: "6 bln", lbl: "Internship" },
   ],
@@ -131,19 +132,19 @@ export const skillsList: SkillCategory[] = [
     icon: "💬",
     title: "LLM & NLP",
     description:
-      "Integrasi GPT-3, Hugging Face, LangChain; PDF analysis, RAG pipeline, dan keyword search via API.",
+      "Integrasi GPT-3/4, Qwen, Hugging Face, LangChain, LangGraph; RAG pipeline, dan multi-document question answering.",
     tags: [
       { name: "LangChain", highlight: true },
       { name: "OpenAI", highlight: true },
+      { name: "Qwen LLM" },
       { name: "Hugging Face" },
-      { name: "NLP" },
     ],
   },
   {
     icon: "🔍",
     title: "Explainable AI",
     description:
-      "Hybrid SHAP + LIME untuk interpretabilitas model — membuat AI transparan dan dapat dipercaya stakeholder.",
+      "Hybrid SHAP + LIME untuk interpretabilitas model — membuat AI transparan dan dapat dipercaya stakeholder bisnis dan medis.",
     tags: [
       { name: "SHAP", highlight: true },
       { name: "LIME", highlight: true },
@@ -154,7 +155,7 @@ export const skillsList: SkillCategory[] = [
     icon: "📊",
     title: "Data Analysis & Viz",
     description:
-      "EDA, statistical testing, Tukey Test, dan visualisasi insight yang actionable untuk keputusan bisnis.",
+      "EDA, statistical hypothesis testing, Tukey test, dan visualisasi insight actionable untuk pengambilan keputusan.",
     tags: [
       { name: "Python" },
       { name: "Pandas" },
@@ -164,89 +165,178 @@ export const skillsList: SkillCategory[] = [
   },
   {
     icon: "🖥️",
-    title: "App Development",
+    title: "App & Web Development",
     description:
-      "UI interaktif dengan Streamlit, web dengan HTML/CSS/JS, serta desktop app Java dan NetBeans IDE.",
+      "UI interaktif Streamlit, web application modern dengan Next.js / React / TypeScript, serta desktop software Java.",
     tags: [
       { name: "Streamlit", highlight: true },
       { name: "FastAPI" },
-      { name: "Next.js" },
-      { name: "HTML/CSS" },
+      { name: "Next.js / React" },
+      { name: "TypeScript" },
     ],
   },
   {
     icon: "🗄️",
-    title: "Database & Programming",
+    title: "Database & Engineering",
     description:
-      "Desain relational database, SQL query optimization, dan pengembangan multi-bahasa pemrograman.",
+      "Desain relational database PostgreSQL & MySQL, optimasi query SQL, serta workflow Git/GitHub CI/CD.",
     tags: [
       { name: "SQL", highlight: true },
-      { name: "Python" },
-      { name: "R" },
-      { name: "TypeScript" },
-      { name: "JavaScript" },
+      { name: "PostgreSQL" },
+      { name: "Docker" },
+      { name: "Git / GitHub" },
     ],
   },
 ];
 
 export const projectsList: ProjectItem[] = [
+  // ── AI & Machine Learning ──
   {
-    title: "Credit Card Default – ANN + XAI",
+    title: "Credit Card Default – ANN + Hybrid XAI",
     emoji: "🧠",
-    badge: { text: "Thesis · XAI", class: "b1" },
+    category: "ai",
+    badge: { text: "Thesis · XAI 81.7%", class: "b1" },
     description:
-      "Model prediksi credit risk dengan ANN, XGBoost feature selection, SMOTE, dan Hybrid XAI (SHAP + LIME). Akurasi 81.7% — project skripsi S1.",
-    stack: ["Python", "ANN", "XGBoost", "SHAP", "LIME"],
+      "Model klasifikasi risiko credit default dengan Artificial Neural Network (ANN), XGBoost feature selection, SMOTE handling imbalance, dan Hybrid XAI (SHAP + LIME) dengan akurasi 81.7% — project skripsi S1 UNNES.",
+    stack: ["Python", "ANN", "XGBoost", "SHAP", "LIME", "SMOTE"],
     githubUrl: "https://github.com/NormaAyaa/Default--Credit-Card",
     demoUrl: "https://default--credit-card.streamlit.app/",
   },
   {
-    title: "CHAT-MULTI-PDF",
-    emoji: "💬",
-    badge: { text: "LLM · Internship", class: "b2" },
-    description:
-      "Sistem analisis dokumen PDF berbasis LLM dengan keyword search dan NLP pipeline menggunakan LangChain dan OpenAI GPT-3. Dibuat saat internship PT. DataIns.",
-    stack: ["LangChain", "OpenAI GPT-3", "Streamlit", "Python"],
-    githubUrl: "https://github.com/NormaAyaa/CHAT-MULTI-PDF",
-  },
-  {
-    title: "RetainAI – Streamlit",
-    emoji: "🤖",
-    badge: { text: "AI · Streamlit", class: "b3" },
-    description:
-      "Aplikasi AI berbasis Streamlit untuk customer retention analysis, dengan UI interaktif dan integrasi model machine learning secara real-time.",
-    stack: ["Streamlit", "Python", "ML"],
-    githubUrl: "https://github.com/NormaAyaa/RetainAI-Streamlit",
-    demoUrl: "https://retainai-app.streamlit.app/",
-  },
-  {
-    title: "Deep Fake Detector",
-    emoji: "🕵️",
-    badge: { text: "Deep Learning", class: "b4" },
-    description:
-      "Sistem deteksi deepfake menggunakan deep learning — mengidentifikasi konten gambar yang dimanipulasi AI dengan model klasifikasi neural network.",
-    stack: ["Deep Learning", "Python", "Computer Vision"],
-    githubUrl: "https://github.com/NormaAyaa/Deep-Fake-Detector",
-    demoUrl: "https://deepfake-detector-ai.streamlit.app/",
-  },
-  {
-    title: "AI-Triase-UGD",
+    title: "AI-Triase-UGD (Emergency Room Triage)",
     emoji: "🏥",
-    badge: { text: "Healthcare AI", class: "b1" },
+    category: "ai",
+    badge: { text: "Agentic AI · Healthcare", class: "b2" },
     description:
-      "Sistem AI untuk triage pasien di UGD — membantu tenaga medis memprioritaskan penanganan pasien secara cerdas dan cepat.",
-    stack: ["Python", "ML", "Healthcare AI"],
+      "Sistem triage cerdas untuk IGD/UGD rumah sakit menggunakan LangGraph Agent + Google Gemini 2.0 Flash dengan framework ESI 1–5. Dilengkapi scoring gejala, analisis tanda vital, dan alokasi bed otomatis.",
+    stack: ["LangGraph", "Gemini 2.0 Flash", "Streamlit", "Python", "Healthcare AI"],
     githubUrl: "https://github.com/NormaAyaa/AI-Triase-UGD",
     demoUrl: "https://ai-triase-ugd.streamlit.app/",
   },
   {
-    title: "Default Credit Card",
-    emoji: "💳",
-    badge: { text: "ML · Finance", class: "b2" },
+    title: "RetainAI – Employee Retention Prediction",
+    emoji: "💼",
+    category: "ai",
+    badge: { text: "Ensemble ML · HR Tech", class: "b3" },
     description:
-      "Analisis dan prediksi credit card default dengan EDA mendalam dan model baseline machine learning sebagai fondasi riset thesis utama.",
-    stack: ["Python", "Scikit-learn", "Pandas", "EDA"],
-    githubUrl: "https://github.com/NormaAyaa/Default--Credit-Card",
-    demoUrl: "https://default--credit-card.streamlit.app/",
+      "Platform AI prediksi risiko resign karyawan menggunakan ensemble ML (Random Forest, XGBoost, Gradient Boosting), dashboard analitik risiko interaktif, Explainable AI, dan smart candidate matching.",
+    stack: ["Streamlit", "Random Forest", "XGBoost", "XAI", "Python"],
+    githubUrl: "https://github.com/NormaAyaa/RetainAI-Streamlit",
+    demoUrl: "https://retainai-app.streamlit.app/",
+  },
+  {
+    title: "Deep Fake Image Detector",
+    emoji: "🕵️",
+    category: "ai",
+    badge: { text: "Deep Learning · CV", class: "b4" },
+    description:
+      "Sistem deteksi manipulasi gambar deepfake berbasis Deep Learning dan Computer Vision untuk mendeteksi keaslian citra visual dan mengidentifikasi konten artifisial buatan AI.",
+    stack: ["Deep Learning", "PyTorch", "Computer Vision", "Streamlit"],
+    githubUrl: "https://github.com/NormaAyaa/Deep-Fake-Detector",
+    demoUrl: "https://deepfake-detector-ai.streamlit.app/",
+  },
+  {
+    title: "Chatbot Hybrid (Local Qwen + OpenAI)",
+    emoji: "🤖",
+    category: "ai",
+    badge: { text: "Dual LLM · Local & Cloud", class: "b1" },
+    description:
+      "Sistem chatbot multi-model yang mengintegrasikan LLM offline lokal (Qwen) untuk inferensi hemat biaya tanpa internet serta OpenAI API untuk reasoning kompleks performa tinggi.",
+    stack: ["Qwen LLM", "OpenAI API", "Python", "Streamlit"],
+    githubUrl: "https://github.com/NormaAyaa/CHATBOT-LOKAL-AND-OPENAI",
+  },
+  {
+    title: "CHAT-MULTI-PDF (RAG & Multi-Doc Analysis)",
+    emoji: "📄",
+    category: "ai",
+    badge: { text: "RAG · LangChain", class: "b2" },
+    description:
+      "Sistem analisis multi-dokumen PDF berbasis LLM & Retrieval-Augmented Generation (RAG) dengan keyword search dan NLP pipeline menggunakan LangChain dan OpenAI GPT-3. (Project PT. DataIns).",
+    stack: ["LangChain", "OpenAI GPT-3", "RAG Pipeline", "Streamlit", "NLP"],
+    githubUrl: "https://github.com/NormaAyaa/CHAT-MULTI-PDF",
+  },
+  {
+    title: "Klasifikasi Kematangan Mangga Kent (CNN)",
+    emoji: "🥭",
+    category: "ai",
+    badge: { text: "Computer Vision · CNN", class: "b3" },
+    description:
+      "Model klasifikasi citra otomatis menggunakan Convolutional Neural Network (CNN) untuk menentukan tingkat kematangan buah mangga Kent dengan akurasi tinggi.",
+    stack: ["CNN", "TensorFlow/Keras", "Computer Vision", "Jupyter"],
+    githubUrl: "https://github.com/NormaAyaa/Klasifikasi-Kematangan-Buah-Mangga-Kent-CNN",
+  },
+  {
+    title: "Network Intrusion Detection System (DL)",
+    emoji: "🛡️",
+    category: "ai",
+    badge: { text: "Cybersecurity · DL", class: "b4" },
+    description:
+      "Penerapan metode Deep Learning dan Machine Learning untuk Network Intrusion Detection System (NIDS) guna mendeteksi ancaman intrusi dan anomali pada lalu lintas jaringan secara real-time.",
+    stack: ["Deep Learning", "Cybersecurity", "Anomaly Detection", "Python"],
+    githubUrl: "https://github.com/NormaAyaa/METHOD-BASED-OF-DEEP-LEARNING-ON-NETWORK-INTRUSION-DETECTION-Machine-Learning-",
+  },
+
+  // ── Web & Enterprise Systems ──
+  {
+    title: "Finance Management Batik Larasati",
+    emoji: "📊",
+    category: "web",
+    badge: { text: "Web App · Enterprise", class: "b1" },
+    description:
+      "Sistem informasi manajemen keuangan dan operasional bisnis Batik Larasati berbasis web modern untuk tracking arus kas, inventaris kain batik, dan pencatatan laba rugi.",
+    stack: ["TypeScript", "Next.js / React", "Tailwind CSS", "Finance"],
+    githubUrl: "https://github.com/NormaAyaa/finance-batik-larasati",
+  },
+  {
+    title: "K6 Cemerlang Jaya Accounting System",
+    emoji: "🏢",
+    category: "web",
+    badge: { text: "Web App · Accounting", class: "b2" },
+    description:
+      "Aplikasi web akuntansi dan operasional perusahaan untuk pencatatan transaksi terstruktur, jurnal umum, buku besar, neraca keuangan, dan automasi pembukuan.",
+    stack: ["TypeScript", "Web Engineering", "SQL Database", "Accounting"],
+    githubUrl: "https://github.com/NormaAyaa/K6-Cemerlangg-Jaya",
+  },
+  {
+    title: "Portal HRIS (Human Resource Info System)",
+    emoji: "👥",
+    category: "web",
+    badge: { text: "HR Tech · Portal", class: "b3" },
+    description:
+      "Portal web HRIS untuk manajemen data karyawan terpusat, monitoring absensi, pengelolaan cuti, dan struktur payroll perusahaan dengan antarmuka yang responsif.",
+    stack: ["JavaScript", "HRIS System", "REST API", "Web Platform"],
+    githubUrl: "https://github.com/NormaAyaa/app3-portal-hris",
+  },
+  {
+    title: "Sistem Informasi Manajemen Klinik Gigi",
+    emoji: "🦷",
+    category: "web",
+    badge: { text: "Healthcare · Web", class: "b4" },
+    description:
+      "Aplikasi web manajemen klinik gigi untuk reservasi janji temu pasien, rekam medis dental elektronik, inventaris obat, serta riwayat tindakan dokter secara rapi.",
+    stack: ["JavaScript", "Clinical Database", "Healthcare App"],
+    githubUrl: "https://github.com/NormaAyaa/Klinik-Gigi",
+  },
+
+  // ── Desktop & Data Science ──
+  {
+    title: "Aplikasi Desktop Penitipan Kucing (Pet Care)",
+    emoji: "🐱",
+    category: "other",
+    badge: { text: "Desktop App · Java", class: "b1" },
+    description:
+      "Aplikasi desktop manajemen penitipan hewan peliharaan (kucing) yang dibangun menggunakan Java GUI dan NetBeans IDE, dilengkapi database relasional untuk pencatatan kandang dan paket layanan.",
+    stack: ["Java", "Swing GUI", "NetBeans IDE", "MySQL"],
+    githubUrl: "https://github.com/NormaAyaa/apk-dekstop-penitipan-kucing",
+  },
+  {
+    title: "Analisis Statistik & Distribusi Normal",
+    emoji: "📈",
+    category: "other",
+    badge: { text: "Data Science · Stats", class: "b2" },
+    description:
+      "Eksplorasi komputasi statistik untuk pengujian hipotesis, pemodelan kurva distribusi normal data, dan analisis variansi data kuantitatif menggunakan Jupyter Notebook.",
+    stack: ["Python", "SciPy", "Statistical Modeling", "Jupyter Notebook"],
+    githubUrl: "https://github.com/NormaAyaa/Distribusi-Normal",
   },
 ];

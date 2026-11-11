@@ -45,15 +45,14 @@ export default function CvModal({ isOpen, onClose }: CvModalProps) {
           <h3 id="cv-modal-title" className="cv-modal-title">
             📄 Curriculum Vitae · Norma Zuhrotul Hayati
           </h3>
-          <div className="cv-modal-actions">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
             <a
               href="/cv-norma.pdf"
               download="CV_Norma_Zuhrotul_Hayati.pdf"
-              className="btn-red"
+              className="btn-primary"
               style={{
-                fontSize: '0.95rem',
-                padding: '4px 12px',
-                transform: 'none',
+                fontSize: '0.84rem',
+                padding: '0.45rem 1.15rem',
               }}
             >
               ⬇ Unduh PDF
