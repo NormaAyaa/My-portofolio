@@ -20,14 +20,15 @@ export default function About() {
           {/* Photo on Left */}
           <div className="canva-whoami-photo">
             <Image
-              src="/norma-photo.png"
+              src="/norma-whoami.jpg"
               alt="Norma Zuhrotul Hayati"
               fill
               sizes="(max-width: 768px) 100vw, 420px"
               style={{
                 objectFit: 'cover',
-                objectPosition: 'top center',
+                objectPosition: 'center 35%',
               }}
+              priority
             />
           </div>
 
